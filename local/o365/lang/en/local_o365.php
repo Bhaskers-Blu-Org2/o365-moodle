@@ -414,6 +414,13 @@ $string['settings_odburl'] = 'OneDrive for Business URL';
 $string['settings_odburl_details'] = 'The URL used to access OneDrive for Business. This can usually be determined by your Azure AD tenant. For example, if your Azure AD tenant is "contoso.onmicrosoft.com", this is most likely "contoso-my.sharepoint.com". Enter only the domain name, do not include http:// or https://';
 $string['settings_odburl_error'] = 'We could not determine your OneDrive for Business URL.<br />Please make sure "Office 365 SharePoint Online" has been added to your registered application in Azure AD.';
 $string['settings_odburl_error_graph'] = 'We could not determine your OneDrive for Business URL, please enter manually. This can usually be determined by using the URL you use to access OneDrive.';
+$string['settings_reset_tokens'] = 'Reset tokens';
+$string['settings_reset_tokens_linktext'] = 'Reset tokens';
+$string['settings_reset_tokens_details'] = 'It seems that the application ID has been updated recently. If the update was made because this site is supposed to be linked to a different Azure application, and the previous Application ID is to be used by another Moodle site, please consider reset tokens, as the existing tokens may not work.
+
+Caution: This will reset all user sessions, course groups, and teams.';
+$string['settings_reset_tokens_done'] = 'Tokens have been reset successfully.';
+$string['settings_reset_tokens_confirmation'] = 'Are you sure you want to reset tokens? This will reset all user sessions, course groups, and teams.';
 $string['settings_secthead_advanced'] = 'Advanced Settings';
 $string['settings_secthead_advanced_desc'] = 'These settings control other features of the plugin suite. Be careful! These may cause unintended effects.';
 $string['settings_secthead_legacy'] = 'Legacy';

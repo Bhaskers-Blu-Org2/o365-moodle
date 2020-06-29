@@ -317,3 +317,15 @@ function local_o365_generate_sharedsecret($length = 36) {
 function local_o365_show_teams_moodle_app_id_tab() {
     return (get_config('local_o365', 'manifest_downloaded'));
 }
+
+/**
+ * Delete all tokens related to o365 integration.
+ */
+function local_o365_reset_tokens() {
+    global $DB;
+
+    $DB->delete_records('local_o365_token');
+    $DB->delete_records('auth_oidc_token');
+    $DB->delete_records('local_o365_connections');
+    $DB->delete_records('local_o365_objects');
+}
