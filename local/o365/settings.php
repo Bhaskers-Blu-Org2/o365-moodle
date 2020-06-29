@@ -103,6 +103,26 @@ if ($hassiteconfig) {
         $configdesc = new \lang_string('settings_setup_step1_credentials_end', 'local_o365', (object)['oidcsettings' => $oidcsettings->out()]);
         $settings->add(new admin_setting_heading('local_o365_setup_step1_credentialsend', '', $configdesc));
 
+        // If the Application ID has been updated in the last week, show option to reset all tokens.
+        $sql = "SELECT *
+                  FROM {config_log}
+                 WHERE plugin = :authoidc
+                   AND name = :clientid
+              ORDER BY id DESC";
+        $params = ['authoidc' => 'auth_oidc', 'clientid' => 'clientid'];
+        $configchangelogs = $DB->get_records_sql($sql, $params, 0, 1);
+        if ($configchangelogs) {
+            $configchangelog = current($configchangelogs);
+            if ($configchangelog->oldvalue && $configchangelog->timemodified > strtotime("-1 week")) {
+                $label = new lang_string('settings_reset_tokens', 'local_o365');
+                $linktext = new lang_string('settings_reset_tokens_linktext', 'local_o365');
+                $linkurl = new \moodle_url('/local/o365/reset_tokens.php');
+                $desc = new lang_string('settings_reset_tokens_details', 'local_o365');
+                $settings->add(new \local_o365\adminsetting\toollink('local_o365/reset_tokens', $label, $linktext, $linkurl,
+                    $desc));
+            }
+        }
+
         // STEP 2: Connection Method.
         $clientid = get_config('auth_oidc', 'clientid');
         $clientsecret = get_config('auth_oidc', 'clientsecret');
